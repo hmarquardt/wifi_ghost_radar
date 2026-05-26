@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ghost Radar</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Local Wi-Fi RF disturbance prototype</p>
+        <h1>Ghost Radar</h1>
+      </div>
+      <div id="connection" class="connection disconnected">disconnected</div>
+    </header>
+
+    <main>
+      <section class="banner">Prototype RF disturbance monitor - not a real security system.</section>
+
+      <section class="grid hero-grid">
+        <article class="status-panel">
+          <div class="panel-title">House Aura</div>
+          <div id="statusText" class="status-text quiet">QUIET</div>
+          <div class="score-row">
+            <span>Motion score</span>
+            <strong id="scoreText">0.00</strong>
+          </div>
+          <div class="meter"><div id="scoreMeter"></div></div>
+          <div class="meta">
+            <span id="sourceText">source: simulator</span>
+            <span id="sampleTime">waiting for samples</span>
+          </div>
+        </article>
+
+        <article class="radar-panel">
+          <div id="radar" class="radar quiet">
+            <div class="sweep"></div>
+            <div id="pulse" class="pulse"></div>
+            <div class="core"></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="controls">
+        <button id="baselineBtn">Use Last 5 Min Baseline</button>
+        <button id="startBtn">Start Simulator</button>
+        <button id="stopBtn">Stop Simulator</button>
+        <a href="/api/export/samples.csv">Samples CSV</a>
+        <a href="/api/export/events.csv">Events CSV</a>
+        <a href="/api/export/recent.json">Recent JSON</a>
+      </section>
+
+      <section class="grid content-grid">
+        <article>
+          <div class="panel-title">RF Weather</div>
+          <canvas id="chart" height="140"></canvas>
+        </article>
+
+        <article>
+          <div class="panel-title">Baseline</div>
+          <dl class="baseline">
+            <div><dt>Created</dt><dd id="baselineCreated">none</dd></div>
+            <div><dt>Mean BFI</dt><dd id="baselineMean">-</dd></div>
+            <div><dt>Std BFI</dt><dd id="baselineStd">-</dd></div>
+          </dl>
+        </article>
+      </section>
+
+      <section class="grid content-grid">
+        <article>
+          <div class="panel-title">Event Timeline</div>
+          <div class="label-actions">
+            <button data-label="human">Mark Last Human</button>
+            <button data-label="pet">Mark Last Pet</button>
+            <button data-label="hvac">Mark Last HVAC</button>
+            <button data-label="false_positive">False Positive</button>
+          </div>
+          <div id="events" class="timeline"></div>
+        </article>
+
+        <article>
+          <div class="panel-title">Recent Samples</div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Time</th><th>Status</th><th>Score</th><th>BFI Var</th><th>RSSI</th></tr>
+              </thead>
+              <tbody id="samples"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>

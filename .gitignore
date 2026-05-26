@@ -1,0 +1,10 @@
+.venv/
+.uv-cache/
+__pycache__/
+*.py[cod]
+.DS_Store
+data/*.sqlite
+data/*.sqlite-*
+*.pcap
+*.pcapng
+.pytest_cache/

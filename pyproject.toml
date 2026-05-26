@@ -1,0 +1,24 @@
+[project]
+name = "wifi-ghost-radar"
+version = "0.1.0"
+description = "Local-first Wi-Fi RF disturbance monitor prototype with simulator-first ingestion."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "pydantic>=2.8.0",
+    "aiosqlite>=0.20.0",
+    "python-multipart>=0.0.9",
+]
+
+[project.optional-dependencies]
+pcap = [
+    "scapy>=2.5.0",
+    "pyshark>=0.6",
+]
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28.0",
+]
